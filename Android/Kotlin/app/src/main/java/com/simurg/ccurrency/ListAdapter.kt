@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
+import org.jetbrains.anko.find
+import org.w3c.dom.Text
 
 /**
 * Created by uyegen on 30.11.2017.
@@ -23,9 +25,15 @@ class ListAdapter(context: Context, list: Array<ModelItem>): BaseAdapter() {
 
         val rank = vi.findViewById<TextView>(R.id.txt_rank)
         val symbol = vi.findViewById<TextView>(R.id.txt_symbol)
+        val name = vi.findViewById<TextView>(R.id.txt_name)
+        val btc = vi.findViewById<TextView>(R.id.txt_btc)
+        val usd = vi.findViewById<TextView>(R.id.txt_usd)
 
         rank.text = list[i].rank
         symbol.text = list[i].symbol
+        name.text = list[i].name
+        btc.text = list[i].price_btc
+        usd.text = list[i].price_usd
 
         return  vi
     }
