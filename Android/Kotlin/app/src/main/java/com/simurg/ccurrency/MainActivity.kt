@@ -1,5 +1,6 @@
 package com.simurg.ccurrency
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -18,57 +19,79 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import android.widget.AdapterView
+import com.simurg.ccurrency.R.id.ccList
+import com.simurg.ccurrency.R.id.ccList
+import com.simurg.ccurrency.R.id.ccList
+
 
 class MainActivity : AppCompatActivity() {
+    var selectedItem = -1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            changeUserInput(true)
-            doAsync{
-                // do background task here
-                val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
-                var result = ""
-                try {
-                    val url = URL(apiUrl)
-                    val connect = url.openConnection() as HttpURLConnection
+        getAndFillData(View(this@MainActivity))
 
-                    connect.readTimeout = 8000
-                    connect.connectTimeout = 8000
-                    connect.requestMethod = "GET"
-                    connect.doOutput = false
-                    connect.connect()
+        btnRefresh.setOnClickListener { view ->
+            getAndFillData(View(this@MainActivity))
+        }
 
-                    val responseCode: Int = connect.responseCode
-                    Log.d("Call", "ResponseCode" + responseCode)
+        ccList.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l -> selectedItem = i }
+    }
 
-                    if (responseCode == 200) {
-                        val tempStream: InputStream = connect.inputStream
-                        result = convertToString(tempStream)
-                    } else {
-                    }
-                } catch(Ex: Exception) {
-                    Log.d("catch", "Error in doInBackground " + Ex.message)
-                    changeUserInput(false)
-                    snackBar(view, "We have got with a problem.")
+    private fun getAndFillData(view: View) {
+        changeUserInput(true)
+//        fun Context.toast(message: CharSequence) =
+//                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        doAsync {
+            // do background task here
+            val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
+            var result = ""
+            try {
+                val url = URL(apiUrl)
+                val connect = url.openConnection() as HttpURLConnection
+
+                connect.readTimeout = 8000
+                connect.connectTimeout = 8000
+                connect.requestMethod = "GET"
+                connect.doOutput = false
+                connect.connect()
+
+                val responseCode: Int = connect.responseCode
+                Log.d("Call", "ResponseCode" + responseCode)
+
+                if (responseCode == 200) {
+                    val tempStream: InputStream = connect.inputStream
+                    result = convertToString(tempStream)
+                } else {
                 }
+            } catch (Ex: Exception) {
+                Log.d("catch", "Error in doInBackground " + Ex.message)
+                changeUserInput(false)
 
-                uiThread{
-                    //update UI thread after completing task
-                    Log.d("uiThread", result)
-                    changeUserInput(false)
-                    snackBar(view, "We took list from outer space.")
+//                toast(message = "We have got with a problem.")
+                snackBar("We have got with a problem.")
+            }
 
-                    val gson = Gson()
-                    val list = gson.fromJson(result, Array<ModelItem>::class.java)
-                    ccList.adapter = ListAdapter(view.context, list)
-                }
+            uiThread {
+                //update UI thread after completing task
+                Log.d("uiThread", result)
+                changeUserInput(false)
+//                toast(message = "We have got with a problem.")
+                snackBar("We took list from outer space.")
+
+                val gson = Gson()
+                val list = gson.fromJson(result, Array<ModelItem>::class.java)
+                ccList.adapter = ListAdapter(view.context, list)
             }
         }
     }
+
 
     private fun convertToString(inStream: InputStream): String {
         var result = ""
@@ -80,10 +103,12 @@ class MainActivity : AppCompatActivity() {
 
             while (true) {
                 tempStr = bReader.readLine()
-                if (tempStr == null) { break }
+                if (tempStr == null) {
+                    break
+                }
                 result += tempStr
             }
-        } catch(Ex: Exception) {
+        } catch (Ex: Exception) {
             Log.e("3", "Error in ConvertToString " + Ex.printStackTrace())
         }
         return result
@@ -93,14 +118,31 @@ class MainActivity : AppCompatActivity() {
         if (noTouchable) {
             window.setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             progressBar.visibility = ProgressBar.VISIBLE
+            rltvProgressBar.visibility = ProgressBar.VISIBLE
         } else {
             window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
             progressBar.visibility = ProgressBar.GONE
+            rltvProgressBar.visibility = ProgressBar.GONE
         }
     }
 
-    private fun snackBar(view: View, msg: String) {
-        Snackbar.make(view, msg, Snackbar.LENGTH_SHORT).show()
+    private fun snackBar(msg: String) {
+        Snackbar.make(getWindow().getDecorView().getRootView(), msg, Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onBackPressed() {
+        Exit()
+        return
+    }
+
+    private fun Exit() {
+        AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure want to close the application?")
+                .setPositiveButton(android.R.string.yes) { dialog, which -> finish() }
+                .setNegativeButton(android.R.string.no) { dialog, which -> dialog.cancel() }
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show()
     }
 }
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {

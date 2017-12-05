@@ -25,20 +25,32 @@
         layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/btnRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
         app:srcCompat="@android:drawable/ic_popup_sync" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
+    <RelativeLayout
+        android:id="@+id/rltvProgressBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="left|center" />
+        android:layout_height="match_parent"
+        android:alpha="0.5"
+        android:background="#000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="visible">
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:visibility="visible"
+            app:layout_anchorGravity="left|center" />
+
+    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
