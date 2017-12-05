@@ -28,9 +28,13 @@ import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.widget.PopupWindow
 import android.view.ViewGroup
+import kotlinx.android.synthetic.main.popup.view.*
+import java.util.ArrayList
 
 
-class MainActivity : AppCompatActivity() {
+abstract class MainActivity : AppCompatActivity() {
+
+    lateinit var modelItems: ArrayList<ModelItem>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
+
 
         getAndFillData(View(this@MainActivity))
 
@@ -52,7 +57,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAndFillData(view: View) {
         changeUserInput(true)
-        doAsync { // do background task here
+        doAsync {
+            // do background task here
             val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
             var result = ""
             try {
@@ -80,7 +86,8 @@ class MainActivity : AppCompatActivity() {
                 snackBar("We have got with a problem.")
             }
 
-            uiThread { //update UI thread after completing task
+            uiThread {
+                //update UI thread after completing task
                 Log.d("uiThread", result)
                 changeUserInput(false)
                 snackBar("We took list from outer space.")
@@ -97,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         val layout = inflater.inflate(R.layout.popup, findViewById<View>(R.id.popup_element) as? ViewGroup)
         val pw = PopupWindow(layout, 700, 700, true)
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
-
+        layout.btnOk.setOnClickListener { pw.dismiss() }
     }
 
 

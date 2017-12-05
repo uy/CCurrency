@@ -1,40 +1,179 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/popup_element"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:alpha="1"
-    android:background="#808080">
+    android:stretchColumns="1">
 
+    <TableRow>
 
-    <TextView
-        android:id="@+id/server_status_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:text="TEST"
-        android:textColor="#fff"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:layout_width="177dp"
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="24h Volume USD        :" />
+
+        <TextView
+            android:id="@+id/txt_24h_volume_usd"
+            android:gravity="left"
+            android:padding="1dip"
+            android:text="24h_volume_usd" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Market Cap USD         :" />
+
+        <TextView
+            android:id="@+id/txt_market_cap_usd"
+            android:gravity="left"
+            android:padding="3dip"
+            android:text="market_cap_usd" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Available Supply         :" />
+
+        <TextView
+            android:id="@+id/txt_available_supply"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="available_supply" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Total Supply                :" />
+
+        <TextView
+            android:id="@+id/txt_total_supply"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="total_supply" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Max Supply                  :" />
+
+        <TextView
+            android:id="@+id/txt_max_supply"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="max_supply" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Percent Change 1h     :" />
+
+        <TextView
+            android:id="@+id/txt_percent_change_1h"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="percent_change_1h" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Percent Change 24h   :" />
+
+        <TextView
+            android:id="@+id/txt_percent_change_24h"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="percent_change_24h" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Percent Change 7d     :" />
+
+        <TextView
+            android:id="@+id/txt_percent_change_7d"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="percent_change_7d" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
+    <TableRow>
+
+        <TextView
+            android:layout_gravity="center"
+            android:padding="3dip"
+            android:text="Last Updated               :" />
+
+        <TextView
+            android:id="@+id/txt_last_updated"
+            android:gravity="start"
+            android:padding="3dip"
+            android:text="last_updated" />
+    </TableRow>
+
+    <View
+        android:layout_height="2dip"
+        android:background="#FF909090" />
+
 
     <Button
-        android:id="@+id/end_data_send_button"
+        android:id="@+id/btnOk"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
-        android:text="Cancel"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-</android.support.constraint.ConstraintLayout>
+        android:text="OK" />
+</TableLayout>
