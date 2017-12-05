@@ -139,7 +139,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun snackBar(msg: String) {
-        Snackbar.make(getWindow().getDecorView().getRootView(), msg, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(window.decorView.rootView, msg, Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onBackPressed() {
