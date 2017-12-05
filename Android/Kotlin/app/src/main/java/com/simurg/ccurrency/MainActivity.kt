@@ -28,7 +28,6 @@ import com.simurg.ccurrency.R.id.ccList
 class MainActivity : AppCompatActivity() {
     var selectedItem = -1
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -133,8 +132,8 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
                 .setTitle("Exit")
                 .setMessage("Are you sure want to close the application?")
-                .setPositiveButton(android.R.string.yes) { dialog, which -> finish() }
-                .setNegativeButton(android.R.string.no) { dialog, which -> dialog.cancel() }
+                .setPositiveButton(android.R.string.yes) { _, _ -> finish() }
+                .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
     }
