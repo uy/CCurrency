@@ -21,6 +21,13 @@ import java.net.HttpURLConnection
 import java.net.URL
 import android.widget.*
 import org.jetbrains.anko.*
+import android.R.string.cancel
+import android.app.Activity
+import android.app.Dialog
+import android.content.DialogInterface
+import android.view.LayoutInflater
+import android.widget.PopupWindow
+import android.view.ViewGroup
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,9 +40,8 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         getAndFillData(View(this@MainActivity))
-        btnRefresh.setOnClickListener { view ->
-            getAndFillData(View(this@MainActivity))
-        }
+
+        btnRefresh.setOnClickListener { getAndFillData(View(this@MainActivity)) }
 
         ccList.isClickable = true
         ccList.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, position, arg3 ->
@@ -89,19 +95,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initiatePopupWindow() {
-//        alert("Testing alerts") {
-//            title = "Alert"
-//            yesButton { toast("Yess!!!") }
-//            noButton { }
-//        }.show()
-
-        alert("Show Alert with three Button", "Alert") {
-            positiveButton("POSITIVE") {
-            }
-        }.show()
-
+        val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val layout = inflater.inflate(R.layout.popup, findViewById<View>(R.id.popup_element) as? ViewGroup)
+        val pw = PopupWindow(layout, 700, 700, true)
+        pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
 
     }
+
 
     private fun convertToString(inStream: InputStream): String {
         var result = ""
