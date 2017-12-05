@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
                 .setTitle("Exit")
                 .setMessage("Are you sure want to close the application?")
-                .setPositiveButton(android.R.string.yes) { _, _ -> finish() }
+                .setPositiveButton(android.R.string.yes) { dialog, _ -> finish() }
                 .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
