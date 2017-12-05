@@ -36,7 +36,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         getAndFillData(View(this@MainActivity))
-
         btnRefresh.setOnClickListener { view ->
             getAndFillData(View(this@MainActivity))
         }
@@ -46,8 +45,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAndFillData(view: View) {
         changeUserInput(true)
-//        fun Context.toast(message: CharSequence) =
-//                Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         doAsync {
             // do background task here
             val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
@@ -74,7 +71,6 @@ class MainActivity : AppCompatActivity() {
                 Log.d("catch", "Error in doInBackground " + Ex.message)
                 changeUserInput(false)
 
-//                toast(message = "We have got with a problem.")
                 snackBar("We have got with a problem.")
             }
 
@@ -82,7 +78,6 @@ class MainActivity : AppCompatActivity() {
                 //update UI thread after completing task
                 Log.d("uiThread", result)
                 changeUserInput(false)
-//                toast(message = "We have got with a problem.")
                 snackBar("We took list from outer space.")
 
                 val gson = Gson()
@@ -91,7 +86,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-
 
     private fun convertToString(inStream: InputStream): String {
         var result = ""
