@@ -52,8 +52,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAndFillData(view: View) {
         changeUserInput(true)
-        doAsync {
-            // do background task here
+        doAsync { // do background task here
             val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
             var result = ""
             try {
@@ -81,8 +80,7 @@ class MainActivity : AppCompatActivity() {
                 snackBar("We have got with a problem.")
             }
 
-            uiThread {
-                //update UI thread after completing task
+            uiThread { //update UI thread after completing task
                 Log.d("uiThread", result)
                 changeUserInput(false)
                 snackBar("We took list from outer space.")
