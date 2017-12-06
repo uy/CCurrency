@@ -1,38 +1,30 @@
 package com.simurg.ccurrency
 
 import android.app.AlertDialog
-import android.app.PendingIntent.getActivity
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import android.view.Gravity
-import android.view.View
-import android.view.WindowManager
+import android.view.*
+import android.widget.AdapterView
+import android.widget.PopupWindow
+import android.widget.ProgressBar
 import com.google.gson.Gson
-
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.popup.view.*
+import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.uiThread
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import android.widget.*
-import org.jetbrains.anko.*
-import android.R.string.cancel
-import android.app.Activity
-import android.app.Dialog
-import android.content.DialogInterface
-import android.view.LayoutInflater
-import android.widget.PopupWindow
-import android.view.ViewGroup
-import kotlinx.android.synthetic.main.popup.view.*
-import java.util.ArrayList
+import java.util.*
 
 
-abstract class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     lateinit var modelItems: ArrayList<ModelItem>
 
@@ -50,7 +42,7 @@ abstract class MainActivity : AppCompatActivity() {
 
         ccList.isClickable = true
         ccList.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, position, arg3 ->
-            //            val o = ccList.getItemAtPosition(position)
+            //val o = ccList.getItemAtPosition(position)
             initiatePopupWindow()
         }
     }
@@ -107,7 +99,6 @@ abstract class MainActivity : AppCompatActivity() {
         layout.btnOk.setOnClickListener { pw.dismiss() }
     }
 
-
     private fun convertToString(inStream: InputStream): String {
         var result = ""
         val isReader = InputStreamReader(inStream)
@@ -148,11 +139,11 @@ abstract class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        Exit()
+        exit()
         return
     }
 
-    private fun Exit() {
+    private fun exit() {
         AlertDialog.Builder(this)
                 .setTitle("Exit")
                 .setMessage("Are you sure want to close the application?")
