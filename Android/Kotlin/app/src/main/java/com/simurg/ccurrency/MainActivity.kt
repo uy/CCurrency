@@ -94,9 +94,14 @@ class MainActivity : AppCompatActivity() {
     private fun initiatePopupWindow() {
         val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layout = inflater.inflate(R.layout.popup, findViewById<View>(R.id.popup_element) as? ViewGroup)
-        val pw = PopupWindow(layout, 700, 700, true)
+        val pw = PopupWindow(layout, 900, 800, true)
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
-        layout.btnOk.setOnClickListener { pw.dismiss() }
+        rltvProgressBar.visibility = ProgressBar.VISIBLE
+        layout.btnOk.setOnClickListener {
+            pw.dismiss()
+            rltvProgressBar.visibility = ProgressBar.GONE
+        }
+//        rltvProgressBar.visibility = ProgressBar.GONE
     }
 
     private fun convertToString(inStream: InputStream): String {
