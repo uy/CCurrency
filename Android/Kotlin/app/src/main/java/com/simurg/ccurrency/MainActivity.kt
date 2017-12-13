@@ -10,31 +10,29 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.PopupWindow
 import android.widget.ProgressBar
+
 import com.google.gson.Gson
+
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.popup.view.*
+
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
+
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
-
-    lateinit var modelItems: ArrayList<ModelItem>
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
 
         getAndFillData(View(this@MainActivity))
 
@@ -73,35 +71,38 @@ class MainActivity : AppCompatActivity() {
                 }
             } catch (Ex: Exception) {
                 Log.d("catch", "Error in doInBackground " + Ex.message)
-                changeUserInput(false)
 
+                changeUserInput(false)
                 snackBar("We have got with a problem.")
             }
 
             uiThread {
                 //update UI thread after completing task
                 Log.d("uiThread", result)
+
                 changeUserInput(false)
                 snackBar("We took list from outer space.")
-
-                val gson = Gson()
-                val list = gson.fromJson(result, Array<ModelItem>::class.java)
-                ccList.adapter = ListAdapter(view.context, list)
+                updateList(result, view)
             }
         }
+    }
+
+    private fun updateList(result: String, view: View) {
+        val gson = Gson()
+        val list = gson.fromJson(result, Array<ModelItem>::class.java)
+        ccList.adapter = ListAdapter(view.context, list)
     }
 
     private fun initiatePopupWindow() {
         val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layout = inflater.inflate(R.layout.popup, findViewById<View>(R.id.popup_element) as? ViewGroup)
-        val pw = PopupWindow(layout, 900, 800, true)
+        val pw = PopupWindow(layout, 900, 700, true)
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
         rltvProgressBar.visibility = ProgressBar.VISIBLE
         layout.btnOk.setOnClickListener {
             pw.dismiss()
             rltvProgressBar.visibility = ProgressBar.GONE
         }
-//        rltvProgressBar.visibility = ProgressBar.GONE
     }
 
     private fun convertToString(inStream: InputStream): String {

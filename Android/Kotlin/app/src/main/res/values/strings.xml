@@ -1,4 +1,16 @@
 <resources>
     <string name="app_name">CCurrency</string>
     <string name="action_settings">Settings</string>
+    <string name="empty_1_char"> </string>
+    <string name="ok">OK</string>
+    <string name="two_point">:</string>
+    <string name="popup_volume_usd_24h">24h Volume USD</string>
+    <string name="popup_market_cap_usd">Market Cap USD</string>
+    <string name="popup_available_supply">Available Supply</string>
+    <string name="popup_total_supply">Total Supply</string>
+    <string name="popup_max_supply">Max Supply</string>
+    <string name="popup_percent_change_1h">Percent Change 1h</string>
+    <string name="popup_percent_change_24h">Percent Change 24h</string>
+    <string name="popup_percent_change_7d">Percent Change 7d</string>
+    <string name="popup_last_updated">Last Updated</string>
 </resources>

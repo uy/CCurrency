@@ -13,7 +13,7 @@ import java.net.URL
 * Created by uyegen on 05.12.2017.
 */
 
-class CoinMarketCapAPI {
+public object CoinMarketCapAPI {
     fun ticker(l: () -> Unit) {
         doAsync { // do background task here
             val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
