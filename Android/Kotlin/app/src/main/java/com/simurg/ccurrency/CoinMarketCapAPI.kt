@@ -1,6 +1,9 @@
 package com.simurg.ccurrency
 
 import android.util.Log
+//import com.simurg.ccurrency.R.id.ccPopupListview
+//import com.simurg.ccurrency.adapters.PopupAdapter
+//import kotlinx.android.synthetic.main.popup_custom.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 import java.io.BufferedReader
@@ -13,7 +16,7 @@ import java.net.URL
 * Created by uyegen on 05.12.2017.
 */
 
-public object CoinMarketCapAPI {
+class CoinMarketCapAPI {
     fun ticker(l: () -> Unit) {
         doAsync { // do background task here
             val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
