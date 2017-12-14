@@ -17,6 +17,7 @@ data class ModelItem(
     @SerializedName("market_cap_usd") val market_cap_usd: String,
     @SerializedName("available_supply") val available_supply: String,
     @SerializedName("total_supply") val total_supply: String,
+    @SerializedName("max_supply") val max_supply: String,
     @SerializedName("percent_change_1h") val percent_change_1h: String,
     @SerializedName("percent_change_24h") val percent_change_24h: String,
     @SerializedName("percent_change_7d") val percent_change_7d: String,

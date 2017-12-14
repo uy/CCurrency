@@ -2,6 +2,7 @@ package com.simurg.ccurrency
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.ColorSpace
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -10,6 +11,7 @@ import android.view.*
 import android.widget.AdapterView
 import android.widget.PopupWindow
 import android.widget.ProgressBar
+import android.widget.TextView
 
 import com.google.gson.Gson
 
@@ -28,6 +30,9 @@ import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
+
+    private var list: Array<ModelItem?> = arrayOfNulls<ModelItem>(0)
+
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -40,8 +45,7 @@ class MainActivity : AppCompatActivity() {
 
         ccList.isClickable = true
         ccList.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, position, arg3 ->
-            //val o = ccList.getItemAtPosition(position)
-            initiatePopupWindow()
+            initiatePopupWindow(list[position])
         }
     }
 
@@ -78,8 +82,6 @@ class MainActivity : AppCompatActivity() {
 
             uiThread {
                 //update UI thread after completing task
-                Log.d("uiThread", result)
-
                 changeUserInput(false)
                 snackBar("We took list from outer space.")
                 updateList(result, view)
@@ -89,15 +91,31 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateList(result: String, view: View) {
         val gson = Gson()
-        val list = gson.fromJson(result, Array<ModelItem>::class.java)
+        list = gson.fromJson(result, Array<ModelItem?>::class.java)
         ccList.adapter = ListAdapter(view.context, list)
     }
 
-    private fun initiatePopupWindow() {
+    private fun initiatePopupWindow(data: ModelItem?) {
         val inflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val layout = inflater.inflate(R.layout.popup, findViewById<View>(R.id.popup_element) as? ViewGroup)
+
+        layout.findViewById<TextView>(R.id.txt_24h_volume_usd).text = data?.volume_usd_24h
+        layout.findViewById<TextView>(R.id.txt_market_cap_usd).text = data?.market_cap_usd
+        layout.findViewById<TextView>(R.id.txt_available_supply).text = data?.available_supply
+        layout.findViewById<TextView>(R.id.txt_total_supply).text = data?.total_supply
+        layout.findViewById<TextView>(R.id.txt_max_supply).text = data?.max_supply
+        layout.findViewById<TextView>(R.id.txt_percent_change_1h).text = data?.percent_change_1h
+        layout.findViewById<TextView>(R.id.txt_percent_change_24h).text = data?.percent_change_24h
+        layout.findViewById<TextView>(R.id.txt_percent_change_7d).text = data?.percent_change_7d
+        layout.findViewById<TextView>(R.id.txt_last_updated).text = data?.last_updated
+
         val pw = PopupWindow(layout, 900, 700, true)
+        pw.setOnDismissListener { // pop-up in disina basildiginda kapatilmasini sagliyor
+            rltvProgressBar.visibility = ProgressBar.GONE
+        }
+
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
+
         rltvProgressBar.visibility = ProgressBar.VISIBLE
         layout.btnOk.setOnClickListener {
             pw.dismiss()

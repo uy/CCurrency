@@ -38,8 +38,8 @@
         android:id="@+id/rltvProgressBar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:alpha="0.5"
-        android:background="#000"
+        android:alpha="0.35"
+        android:background="#666"
         android:clickable="true"
         android:focusable="true"
         android:visibility="visible">

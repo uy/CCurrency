@@ -14,7 +14,7 @@ import org.w3c.dom.Text
 * Created by uyegen on 30.11.2017.
 */
 
-class ListAdapter(context: Context, list: Array<ModelItem>): BaseAdapter() {
+class ListAdapter(context: Context, list: Array<ModelItem?>): BaseAdapter() {
     private var list = list
     private var mInflator = LayoutInflater.from(context)
 
@@ -29,16 +29,16 @@ class ListAdapter(context: Context, list: Array<ModelItem>): BaseAdapter() {
         val btc = vi.findViewById<TextView>(R.id.txt_btc)
         val usd = vi.findViewById<TextView>(R.id.txt_usd)
 
-        rank.text = list[i].rank
-        symbol.text = list[i].symbol
-        name.text = list[i].name
-        btc.text = list[i].price_btc
-        usd.text = list[i].price_usd
+        rank.text = list[i]?.rank
+        symbol.text = list[i]?.symbol
+        name.text = list[i]?.name
+        btc.text = list[i]?.price_btc
+        usd.text = list[i]?.price_usd
 
         return  vi
     }
 
-    override fun getItem(p0: Int): Any {
+    override fun getItem(p0: Int): ModelItem? {
         return this.list[p0]
     }
 
