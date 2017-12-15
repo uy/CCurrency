@@ -47,15 +47,24 @@ class MainActivity : AppCompatActivity() {
             getAndFillData(View(this@MainActivity))
 
         btnRefresh.setOnClickListener {
-            if (!isNetworkAvailable(this)){
+            if (!isNetworkAvailable(this)) {
                 snackBar("Internet connection has closed")
             } else
-            getAndFillData(View(this@MainActivity)) }
+                getAndFillData(View(this@MainActivity))
+        }
 
         ccList.isClickable = true
         ccList.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, position, arg3 ->
             initiatePopupWindow(list[position])
         }
+
+        srl.setOnRefreshListener {
+            srl.isEnabled = false
+            srl.isRefreshing = false;
+            getAndFillData(View(this@MainActivity))
+
+        }
+
     }
 
     private fun getAndFillData(view: View) {
