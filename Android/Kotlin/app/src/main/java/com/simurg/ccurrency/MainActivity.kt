@@ -9,10 +9,6 @@ import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
-import android.widget.AdapterView
-import android.widget.PopupWindow
-import android.widget.ProgressBar
-import android.widget.TextView
 
 import com.google.gson.Gson
 
@@ -25,10 +21,13 @@ import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
+import android.net.ConnectivityManager
+import android.widget.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -41,9 +40,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        getAndFillData(View(this@MainActivity))
+        if (!isNetworkAvailable(this)) {
+            Toast.makeText(this, "No Internet connection", Toast.LENGTH_LONG).show();
+            finish()
+        } else
+            getAndFillData(View(this@MainActivity))
 
-        btnRefresh.setOnClickListener { getAndFillData(View(this@MainActivity)) }
+        btnRefresh.setOnClickListener {
+            if (!isNetworkAvailable(this)){
+                snackBar("Internet connection has closed")
+            } else
+            getAndFillData(View(this@MainActivity)) }
 
         ccList.isClickable = true
         ccList.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, position, arg3 ->
@@ -112,7 +119,8 @@ class MainActivity : AppCompatActivity() {
         layout.findViewById<TextView>(R.id.txt_last_updated).text = data?.last_updated
 
         val pw = PopupWindow(layout, 900, 700, true)
-        pw.setOnDismissListener { // pop-up in disina basildiginda kapatilmasini sagliyor
+        pw.setOnDismissListener {
+            // pop-up in disina basildiginda kapatilmasini sagliyor
             rltvProgressBar.visibility = ProgressBar.GONE
         }
 
@@ -177,6 +185,11 @@ class MainActivity : AppCompatActivity() {
                 .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
+    }
+
+    fun isNetworkAvailable(context: Context): Boolean {
+        val conMan = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        return conMan.activeNetworkInfo != null && conMan.activeNetworkInfo.isConnected
     }
 }
 //    override fun onCreateOptionsMenu(menu: Menu): Boolean {
