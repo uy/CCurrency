@@ -2,6 +2,7 @@ package com.simurg.ccurrency
 
 import android.app.AlertDialog
 import android.content.Context
+import android.graphics.Color
 import android.graphics.ColorSpace
 import android.os.Bundle
 import android.support.design.widget.Snackbar
@@ -17,6 +18,7 @@ import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.popup.*
 import kotlinx.android.synthetic.main.popup.view.*
 
 import org.jetbrains.anko.doAsync
@@ -115,9 +117,9 @@ class MainActivity : AppCompatActivity() {
         }
 
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
-
         rltvProgressBar.visibility = ProgressBar.VISIBLE
         layout.btnOk.setOnClickListener {
+
             pw.dismiss()
             rltvProgressBar.visibility = ProgressBar.GONE
         }
