@@ -12,13 +12,18 @@ class CCurrencyVC: UIViewController, UITableViewDataSource {
     
     @IBOutlet weak var list: UITableView!
     
-    let arr = ["1", "2", "3"]
+    var currList = [ModelItem]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
         list.dataSource = self
+        
+        CoinMarketCapAPI.ticker { (result) in
+            self.currList = result
+            self.list.reloadData()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,15 +31,20 @@ class CCurrencyVC: UIViewController, UITableViewDataSource {
         // Dispose of any resources that can be recreated.
     }
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.arr.count
+        return self.currList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Row", for: indexPath) as! ListRow
         
-        cell.rank.text = arr[indexPath.item]
+        cell.rank.text = self.currList[indexPath.item].rank
+        cell.symbol.text = self.currList[indexPath.item].symbol
+        cell.name.text = self.currList[indexPath.item].name
+        cell.btcPrize.text = self.currList[indexPath.item].price_btc
+        cell.usdPrize.text = self.currList[indexPath.item].price_usd
+        
+        cell.name.adjustsFontSizeToFitWidth = true
         
         return cell
     }

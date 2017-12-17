@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		16229770FE332EB5366A9257 /* Pods_CCurrency.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1A767B5A6070A56B248ACAD9 /* Pods_CCurrency.framework */; };
+		7192440E1FE5915600ECFB26 /* CoinMarketCapAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7192440D1FE5915600ECFB26 /* CoinMarketCapAPI.swift */; };
+		719244111FE594AA00ECFB26 /* ModelItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 719244101FE594AA00ECFB26 /* ModelItem.swift */; };
 		71C22B5D1FDB19F3004CDB0B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C22B5C1FDB19F3004CDB0B /* AppDelegate.swift */; };
 		71C22B5F1FDB19F3004CDB0B /* CCurrencyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71C22B5E1FDB19F3004CDB0B /* CCurrencyVC.swift */; };
 		71C22B621FDB19F3004CDB0B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 71C22B601FDB19F3004CDB0B /* Main.storyboard */; };
@@ -19,6 +21,8 @@
 /* Begin PBXFileReference section */
 		1A767B5A6070A56B248ACAD9 /* Pods_CCurrency.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CCurrency.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6FC2FAFBE35DEE56BCE8BB64 /* Pods-CCurrency.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CCurrency.debug.xcconfig"; path = "Pods/Target Support Files/Pods-CCurrency/Pods-CCurrency.debug.xcconfig"; sourceTree = "<group>"; };
+		7192440D1FE5915600ECFB26 /* CoinMarketCapAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketCapAPI.swift; sourceTree = "<group>"; };
+		719244101FE594AA00ECFB26 /* ModelItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelItem.swift; sourceTree = "<group>"; };
 		71C22B591FDB19F3004CDB0B /* CCurrency.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CCurrency.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		71C22B5C1FDB19F3004CDB0B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		71C22B5E1FDB19F3004CDB0B /* CCurrencyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CCurrencyVC.swift; sourceTree = "<group>"; };
@@ -42,6 +46,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7192440F1FE5947500ECFB26 /* CoinMarketCapAPI */ = {
+			isa = PBXGroup;
+			children = (
+				7192440D1FE5915600ECFB26 /* CoinMarketCapAPI.swift */,
+				719244101FE594AA00ECFB26 /* ModelItem.swift */,
+			);
+			path = CoinMarketCapAPI;
+			sourceTree = "<group>";
+		};
 		71C22B501FDB19F3004CDB0B = {
 			isa = PBXGroup;
 			children = (
@@ -66,6 +79,7 @@
 				71C22B5C1FDB19F3004CDB0B /* AppDelegate.swift */,
 				71C22B5E1FDB19F3004CDB0B /* CCurrencyVC.swift */,
 				71C22B6E1FDB27C0004CDB0B /* ListRow.swift */,
+				7192440F1FE5947500ECFB26 /* CoinMarketCapAPI */,
 				71C22B601FDB19F3004CDB0B /* Main.storyboard */,
 				71C22B631FDB19F3004CDB0B /* Assets.xcassets */,
 				71C22B651FDB19F3004CDB0B /* LaunchScreen.storyboard */,
@@ -222,7 +236,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7192440E1FE5915600ECFB26 /* CoinMarketCapAPI.swift in Sources */,
 				71C22B5F1FDB19F3004CDB0B /* CCurrencyVC.swift in Sources */,
+				719244111FE594AA00ECFB26 /* ModelItem.swift in Sources */,
 				71C22B5D1FDB19F3004CDB0B /* AppDelegate.swift in Sources */,
 				71C22B6F1FDB27C0004CDB0B /* ListRow.swift in Sources */,
 			);

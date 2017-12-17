@@ -134,9 +134,10 @@ class MainActivity : AppCompatActivity() {
         }
 
         pw.showAtLocation(layout, Gravity.CENTER, 0, 0)
-        rltvProgressBar.visibility = ProgressBar.VISIBLE
-        layout.btnOk.setOnClickListener {
 
+        rltvProgressBar.visibility = ProgressBar.VISIBLE
+
+        layout.btnOk.setOnClickListener {
             pw.dismiss()
             rltvProgressBar.visibility = ProgressBar.GONE
         }
@@ -196,7 +197,7 @@ class MainActivity : AppCompatActivity() {
                 .show()
     }
 
-    fun isNetworkAvailable(context: Context): Boolean {
+    private fun isNetworkAvailable(context: Context): Boolean {
         val conMan = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         return conMan.activeNetworkInfo != null && conMan.activeNetworkInfo.isConnected
     }
