@@ -26,6 +26,7 @@ import android.net.ConnectivityManager
 import android.widget.*
 import android.content.Intent
 import org.jetbrains.anko.browse
+import org.jetbrains.anko.startActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -74,19 +75,21 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-//            R.id.action_settings ->
-//                // User chose the "Settings" item, show the app settings UI...
-//                return true
-
-            R.id.action_favorite ->
+            R.id.action_settings ->
+                // User chose the "Settings" item, show the app settings UI...
                 return true
 
-            else ->
-                // If we got here, the user's action was not recognized.
-                // Invoke the superclass to handle it.
-                return super.onOptionsItemSelected(item)
-        }
+            R.id.action_favorite ->
+                startActivity<FavoritesActivity>()
 
+
+//            else ->
+//                // If we got here, the user's action was not recognized.
+//                // Invoke the superclass to handle it.
+//                return super.onOptionsItemSelected(item)
+
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 
