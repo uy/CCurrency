@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/activity_main_gradient_background"
-
-    tools:context="com.simurg.ccurrency.MainActivity">
+    tools:context="com.example.saltin.myapplication.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -22,38 +20,14 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
-
+    <include layout="@layout/content_main" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/btnRefresh"
+        android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_popup_sync" />
+        app:srcCompat="@android:drawable/ic_dialog_email" />
 
-    <RelativeLayout
-        android:id="@+id/rltvProgressBar"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:alpha="0.35"
-        android:background="#666"
-        android:clickable="true"
-        android:focusable="true"
-        android:visibility="visible">
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:visibility="visible"
-            app:layout_anchorGravity="left|center" />
-
-    </RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>

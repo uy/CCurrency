@@ -2,8 +2,6 @@ package com.simurg.ccurrency
 
 import android.app.AlertDialog
 import android.content.Context
-import android.graphics.Color
-import android.graphics.ColorSpace
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
@@ -14,20 +12,21 @@ import com.google.gson.Gson
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
-import kotlinx.android.synthetic.main.popup.*
 import kotlinx.android.synthetic.main.popup.view.*
 
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 
 import java.io.BufferedReader
-import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
 import android.net.ConnectivityManager
 import android.widget.*
+import android.content.Intent
+import org.jetbrains.anko.browse
+import org.jetbrains.anko.startActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -65,7 +64,34 @@ class MainActivity : AppCompatActivity() {
 
         }
 
+
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_settings ->
+                // User chose the "Settings" item, show the app settings UI...
+                return true
+
+            R.id.action_favorite ->
+                startActivity<FavoritesActivity>()
+
+
+//            else ->
+//                // If we got here, the user's action was not recognized.
+//                // Invoke the superclass to handle it.
+//                return super.onOptionsItemSelected(item)
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun getAndFillData(view: View) {
         changeUserInput(true)
@@ -202,18 +228,4 @@ class MainActivity : AppCompatActivity() {
         return conMan.activeNetworkInfo != null && conMan.activeNetworkInfo.isConnected
     }
 }
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        return when (item.itemId) {
-//            R.id.action_settings -> true
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
+
