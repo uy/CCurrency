@@ -1,7 +1,8 @@
-package com.simurg.ccurrency
+package com.simurg.ccurrency.activities
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import com.simurg.ccurrency.R
 
 class FavoritesActivity : AppCompatActivity() {
 

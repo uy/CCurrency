@@ -1,37 +1,33 @@
-package com.simurg.ccurrency
+package com.simurg.ccurrency.activities
 
 import android.app.AlertDialog
 import android.content.Context
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.*
-
+import android.widget.*
 import com.google.gson.Gson
-
+import com.simurg.ccurrency.ListAdapter
+import com.simurg.ccurrency.ModelItem
+import com.simurg.ccurrency.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.popup.view.*
-
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.uiThread
-
 import java.io.BufferedReader
 import java.io.InputStream
 import java.io.InputStreamReader
 import java.net.HttpURLConnection
 import java.net.URL
-import android.net.ConnectivityManager
-import android.widget.*
-import android.content.Intent
-import org.jetbrains.anko.browse
-import org.jetbrains.anko.startActivity
 
 
 class MainActivity : AppCompatActivity() {
 
-    private var list: Array<ModelItem?> = arrayOfNulls<ModelItem>(0)
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -40,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (!isNetworkAvailable(this)) {
-            Toast.makeText(this, "No Internet connection", Toast.LENGTH_LONG).show();
             finish()
-        } else
+        } else {
             getAndFillData(View(this@MainActivity))
+        }
 
         btnRefresh.setOnClickListener {
             if (!isNetworkAvailable(this)) {
@@ -53,18 +49,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         ccList.isClickable = true
-        ccList.onItemClickListener = AdapterView.OnItemClickListener { arg0, arg1, position, arg3 ->
             initiatePopupWindow(list[position])
         }
 
         srl.setOnRefreshListener {
             srl.isEnabled = false
-            srl.isRefreshing = false;
             getAndFillData(View(this@MainActivity))
-
         }
-
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -82,16 +73,13 @@ class MainActivity : AppCompatActivity() {
             R.id.action_favorite ->
                 startActivity<FavoritesActivity>()
 
-
 //            else ->
 //                // If we got here, the user's action was not recognized.
 //                // Invoke the superclass to handle it.
 //                return super.onOptionsItemSelected(item)
-
         }
         return super.onOptionsItemSelected(item)
     }
-
 
     private fun getAndFillData(view: View) {
         changeUserInput(true)

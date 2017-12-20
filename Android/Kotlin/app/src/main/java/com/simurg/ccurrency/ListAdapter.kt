@@ -7,8 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
-import org.jetbrains.anko.find
-import org.w3c.dom.Text
 
 /**
 * Created by uyegen on 30.11.2017.
@@ -16,12 +14,12 @@ import org.w3c.dom.Text
 
 class ListAdapter(context: Context, list: Array<ModelItem?>): BaseAdapter() {
     private var list = list
-    private var mInflator = LayoutInflater.from(context)
+    private var inflator = LayoutInflater.from(context)
 
     @SuppressLint("ViewHolder")
     override fun getView(i: Int, convertView: View?, viewGroup: ViewGroup?): View {
         //var vi = convertView
-        val vi = mInflator.inflate(R.layout.list_item, null)
+        val vi = inflator.inflate(R.layout.list_item, null)
 
         val rank = vi.findViewById<TextView>(R.id.txt_rank)
         val symbol = vi.findViewById<TextView>(R.id.txt_symbol)
