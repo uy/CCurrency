@@ -8,15 +8,39 @@ This repo created for practising on Swift and Kotlin. In the future, there may b
 **Platforms & Languages**
 * *iOS*:
   1. :+1: Swift
-  2. :point_right: Obj-C
+  2. :no_mouth: Obj-C
 * *Android*:
   1. :+1: Kotlin
-  2. :point_right: Java
+  2. :confused: Java
+  
+**Design**
+* :point_right: Will be found
   
 ### Back-End
+**User&Login Services for Personal Track**
+* :point_right: User
+  1. :point_right: Create
+  2. :point_right: Login
+  
+* :point_right: Favorite Currencies
+  1. :point_right: Add
+  2. :point_right: Delete
+  3. :point_right: Track
+  
+* :point_right: Push Notification
+  1. :point_right: When favorite currencies' price changed
+
 **Resources**
 1. :+1: coinmarketcap.com
 1. :point_right: Other exchange systems
+  * Like bittrex, binance, yobit etc.
+
+Emoji | Meanings
+--- | ---
+:+1: | Implemented
+:point_right: | Will be implemented
+:confused: | May be implemented
+:no_mouth: | Won't be implemented
 
 # MIT License
 
