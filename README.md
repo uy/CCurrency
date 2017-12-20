@@ -31,10 +31,11 @@ This repo created for practising on Swift and Kotlin. In the future, there may b
   1. :point_right: When favorite currencies' price changed
 
 **Resources**
-1. :+1: coinmarketcap.com
-1. :point_right: Other exchange systems
-  * Like bittrex, binance, yobit etc.
+* :+1: coinmarketcap.com
+* :point_right: Other exchange systems
+  1. Like bittrex, binance, yobit etc.
 
+## Dictionary
 Emoji | Meanings
 --- | ---
 :+1: | Implemented
