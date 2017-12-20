@@ -4,6 +4,7 @@ Crypto Currencies List.
 This repo created for practising on Swift and Kotlin. In the future, there may be any other language or platform.
 
 ## Features
+### Front-End
 **Platforms & Languages**
 * *iOS*:
   1. :+1: Swift
@@ -11,7 +12,8 @@ This repo created for practising on Swift and Kotlin. In the future, there may b
 * *Android*:
   1. :+1: Kotlin
   2. :point_right: Java
-
+  
+### Back-End
 **Resources**
 1. :+1: coinmarketcap.com
 1. :point_right: Other exchange systems
