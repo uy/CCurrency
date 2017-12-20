@@ -28,6 +28,7 @@ import java.net.URL
 
 class MainActivity : AppCompatActivity() {
 
+    private var list: Array<ModelItem?> = arrayOfNulls(0) // <ModelItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         if (!isNetworkAvailable(this)) {
+            Toast.makeText(this, "No Internet connection", Toast.LENGTH_LONG).show()
             finish()
         } else {
             getAndFillData(View(this@MainActivity))
@@ -49,11 +51,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         ccList.isClickable = true
+        ccList.onItemClickListener = AdapterView.OnItemClickListener{ _: AdapterView<*>?, _: View?, position: Int, _: Long ->
             initiatePopupWindow(list[position])
         }
 
         srl.setOnRefreshListener {
             srl.isEnabled = false
+            srl.isRefreshing = false
             getAndFillData(View(this@MainActivity))
         }
     }
