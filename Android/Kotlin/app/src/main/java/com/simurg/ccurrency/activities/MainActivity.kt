@@ -89,6 +89,7 @@ class MainActivity : AppCompatActivity() {
     private fun getAndFillData(view: View) {
         changeUserInput(true)
         CoinMarketCapAPI.ticker { resultBool, resultText, resultList ->
+            list = resultList
             changeUserInput(resultBool)
             snackBar(resultText)
             if (resultList.isNotEmpty()) {
