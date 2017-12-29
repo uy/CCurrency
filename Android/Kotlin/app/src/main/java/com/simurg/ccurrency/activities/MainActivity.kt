@@ -13,6 +13,7 @@ import com.google.gson.Gson
 import com.simurg.ccurrency.ListAdapter
 import com.simurg.ccurrency.ModelItem
 import com.simurg.ccurrency.R
+import com.simurg.ccurrency.ccapi.CoinMarketCapAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.popup.view.*
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     private var list: Array<ModelItem?> = arrayOfNulls(0) // <ModelItem>
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
@@ -46,8 +46,9 @@ class MainActivity : AppCompatActivity() {
         btnRefresh.setOnClickListener {
             if (!isNetworkAvailable(this)) {
                 snackBar("Internet connection has closed")
-            } else
+            } else {
                 getAndFillData(View(this@MainActivity))
+            }
         }
 
         ccList.isClickable = true
@@ -87,47 +88,16 @@ class MainActivity : AppCompatActivity() {
 
     private fun getAndFillData(view: View) {
         changeUserInput(true)
-        doAsync {
-            // do background task here
-            val apiUrl = "https://api.coinmarketcap.com/v1/ticker/"
-            var result = ""
-            try {
-                val url = URL(apiUrl)
-                val connect = url.openConnection() as HttpURLConnection
-
-                connect.readTimeout = 8000
-                connect.connectTimeout = 8000
-                connect.requestMethod = "GET"
-                connect.doOutput = false
-                connect.connect()
-
-                val responseCode: Int = connect.responseCode
-                Log.d("Call", "ResponseCode" + responseCode)
-
-                if (responseCode == 200) {
-                    val tempStream: InputStream = connect.inputStream
-                    result = convertToString(tempStream)
-                } else {
-                }
-            } catch (Ex: Exception) {
-                Log.d("catch", "Error in doInBackground " + Ex.message)
-
-                changeUserInput(false)
-                snackBar("We have got with a problem.")
-            }
-
-            uiThread {
-                //update UI thread after completing task
-                changeUserInput(false)
-                snackBar("We took list from outer space.")
-                updateList(result, view)
+        CoinMarketCapAPI.ticker { resultBool, resultText, resultList ->
+            changeUserInput(resultBool)
+            snackBar(resultText)
+            if (resultList.isNotEmpty()) {
+                updateList(resultList, view)
             }
         }
     }
 
-    private fun updateList(result: String, view: View) {
-        val gson = Gson()
-        list = gson.fromJson(result, Array<ModelItem?>::class.java)
+    private fun updateList(list: Array<ModelItem?>, view: View) {
         ccList.adapter = ListAdapter(view.context, list)
     }
 
@@ -159,27 +129,6 @@ class MainActivity : AppCompatActivity() {
             pw.dismiss()
             rltvProgressBar.visibility = ProgressBar.GONE
         }
-    }
-
-    private fun convertToString(inStream: InputStream): String {
-        var result = ""
-        val isReader = InputStreamReader(inStream)
-        val bReader = BufferedReader(isReader)
-        var tempStr: String?
-
-        try {
-
-            while (true) {
-                tempStr = bReader.readLine()
-                if (tempStr == null) {
-                    break
-                }
-                result += tempStr
-            }
-        } catch (Ex: Exception) {
-            Log.e("3", "Error in ConvertToString " + Ex.printStackTrace())
-        }
-        return result
     }
 
     private fun changeUserInput(noTouchable: Boolean) {
