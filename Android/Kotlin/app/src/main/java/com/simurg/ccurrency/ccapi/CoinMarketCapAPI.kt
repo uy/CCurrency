@@ -41,7 +41,6 @@ class CoinMarketCapAPI {
                     if (responseCode == 200) {
                         val tempStream: InputStream = connect.inputStream
                         result = convertToString(tempStream)
-                    } else {
                     }
                 } catch (Ex: Exception) {
                     Log.d("catch", "Error in doInBackground " + Ex.message)
@@ -77,5 +76,4 @@ class CoinMarketCapAPI {
             return result
         }
     }
-
 }

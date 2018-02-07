@@ -6,10 +6,8 @@ import android.net.ConnectivityManager
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.*
 import android.widget.*
-import com.google.gson.Gson
 import com.simurg.ccurrency.ListAdapter
 import com.simurg.ccurrency.ModelItem
 import com.simurg.ccurrency.R
@@ -17,14 +15,7 @@ import com.simurg.ccurrency.ccapi.CoinMarketCapAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.popup.view.*
-import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.startActivity
-import org.jetbrains.anko.uiThread
-import java.io.BufferedReader
-import java.io.InputStream
-import java.io.InputStreamReader
-import java.net.HttpURLConnection
-import java.net.URL
 
 
 class MainActivity : AppCompatActivity() {
@@ -159,8 +150,12 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
                 .setTitle("Exit")
                 .setMessage("Are you sure want to close the application?")
-                .setPositiveButton(android.R.string.yes) { dialog, _ -> finish() }
-                .setNegativeButton(android.R.string.no) { dialog, _ -> dialog.cancel() }
+                .setPositiveButton(android.R.string.yes) { _, _ ->
+                    finish()
+                }
+                .setNegativeButton(android.R.string.no) { dialog, _ ->
+                    dialog.cancel()
+                }
                 .setIcon(android.R.drawable.ic_dialog_alert)
                 .show()
     }

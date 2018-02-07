@@ -2,8 +2,6 @@ package com.simurg.ccurrency
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.Resources
-import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
